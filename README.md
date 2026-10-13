@@ -88,10 +88,3 @@ uvicorn rlhf.server:app --reload
 | `rlhf/eval.py` | Held-out split and ranking accuracy |
 | `rlhf/store.py` | In-memory task and rollout store |
 | `rlhf/server.py` | FastAPI app |
-
-## Limitations
-
-- **No way to add tasks or rollouts over HTTP**, so `/v1/quality` reports an empty, unhealthy dataset when run standalone; populate the store in code.
-- **All state is in memory and per process.** The `trainer` service in `docker-compose.yml` can't see preferences recorded by the `api` service, Redis is provisioned but unused, and `rlhf.trainer` has no `__main__` entry point.
-- **No `Dockerfile`, dependency file, or tests** yet, so `docker compose up` won't build.
-- Reward features are hand-picked toy signals, not embeddings.
